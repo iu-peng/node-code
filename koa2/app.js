@@ -37,6 +37,16 @@ app.use(async (ctx, next) => {
   console.log(`${ctx.method} ${ctx.url} - ${ms}ms`);
 });
 
+// 模拟登陆
+app.use(async (ctx, next) => {
+  if (ctx.query.user === "roc") {
+    console.log("成功登陆");
+    await next();
+  } else {
+    ctx.body = "登录失败";
+  }
+});
+
 // routes
 app.use(index.routes(), index.allowedMethods());
 app.use(users.routes(), users.allowedMethods());
