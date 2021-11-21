@@ -14,10 +14,6 @@ const server = http.createServer((req, res) => {
         user: "张三",
         content: "内容1",
       },
-      {
-        user: "李四",
-        content: "内容2",
-      },
     ];
     res.writeHead(200, { "Content-type": "application/json" });
     res.end(JSON.stringify(result));
