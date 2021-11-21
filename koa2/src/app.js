@@ -5,6 +5,8 @@ const json = require("koa-json");
 const onerror = require("koa-onerror");
 const bodyparser = require("koa-bodyparser");
 const logger = require("koa-logger");
+const session = require("koa-generic-session"); // session配置
+const cors = require("koa2-cors"); // 跨域配置
 
 const index = require("./routes/index");
 const users = require("./routes/users");
@@ -12,6 +14,26 @@ const comments = require("./routes/comments");
 
 // error handler
 onerror(app);
+
+//  cors跨域配置
+app.use(
+  cors({
+    origin: "http://localhost:8080",
+    credentials: true, // 允许跨域带cookie
+  })
+);
+
+app.keys = ["kFif*34^$f8"]; // 秘钥用于加密
+app.use(
+  session({
+    // 配置cookie
+    cookie: {
+      path: "/",
+      httpOnly: true,
+      maxAge: 24 * 60 * 60 * 1000,
+    },
+  })
+);
 
 // middlewares
 app.use(
