@@ -1,0 +1,24 @@
+/**
+ * user controller
+ *
+ */
+
+const User = require("../models/User");
+
+/**
+ *注册
+ * @param {string} username 用户名
+ * @param {string} password 密码
+ * @returns 创建结果
+ */
+async function register(username, password) {
+  const newUser = await User.create({
+    username,
+    password,
+  });
+  return newUser;
+}
+
+module.exports = {
+  register,
+};
