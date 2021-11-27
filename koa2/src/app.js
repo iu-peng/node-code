@@ -11,6 +11,7 @@ const cors = require("koa2-cors"); // 跨域配置
 const index = require("./routes/index");
 const users = require("./routes/users");
 const address = require("./routes/address");
+const shop = require("./routes/shop");
 
 const comments = require("./routes/comments");
 
@@ -76,6 +77,7 @@ app.use(async (ctx, next) => {
 app.use(index.routes(), index.allowedMethods());
 app.use(users.routes(), users.allowedMethods());
 app.use(address.routes(), address.allowedMethods());
+app.use(shop.routes(), shop.allowedMethods());
 app.use(comments.routes(), users.allowedMethods());
 
 // error-handling
