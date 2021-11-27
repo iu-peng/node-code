@@ -10,6 +10,8 @@ const cors = require("koa2-cors"); // 跨域配置
 
 const index = require("./routes/index");
 const users = require("./routes/users");
+const address = require("./routes/address");
+
 const comments = require("./routes/comments");
 
 // error handler
@@ -24,6 +26,7 @@ app.use(
 );
 
 app.keys = ["kFif*34^$f8"]; // 秘钥用于加密
+// 给前端下发sid
 app.use(
   session({
     // 配置cookie
@@ -72,6 +75,7 @@ app.use(async (ctx, next) => {
 // routes
 app.use(index.routes(), index.allowedMethods());
 app.use(users.routes(), users.allowedMethods());
+app.use(address.routes(), address.allowedMethods());
 app.use(comments.routes(), users.allowedMethods());
 
 // error-handling
