@@ -3,7 +3,7 @@
  */
 
 const router = require("koa-router")();
-const { createOrder } = require("../controller/order");
+const { createOrder, getOrderList } = require("../controller/order");
 const loginCheck = require("../middleware/loginCheck");
 const { ErrorModel, SuccessModel } = require("../res-model/index");
 
@@ -27,5 +27,13 @@ router.post("/", loginCheck, async (ctx, next) => {
 });
 
 // 获取订单列表
+router.get("/", loginCheck, async (ctx, next) => {
+  const userInfo = ctx.session.userInfo;
+  const { username } = userInfo;
+
+  const orders = await getOrderList(username);
+
+  ctx.body = new SuccessModel(orders);
+});
 
 module.exports = router;

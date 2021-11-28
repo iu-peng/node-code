@@ -51,6 +51,17 @@ async function createOrder(username, data) {
   return newOrder;
 }
 
+/**
+ * 获取订单列表
+ * @param {string} username
+ * @returns 订单列表
+ */
+async function getOrderList(username) {
+  const orders = await Order.find({ username });
+  return orders;
+}
+
 module.exports = {
   createOrder,
+  getOrderList,
 };
